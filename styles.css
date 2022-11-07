@@ -1,0 +1,29 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f3f6f9;
+    height: 100vh;
+}
+header {
+    background-color: #ffffff;
+}
+
+
+/* #btns_change_page .active { */
+#btns_change_page .active {
+    background-color: red;
+}
+#btns-change-page button {
+
+}
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0
+  }

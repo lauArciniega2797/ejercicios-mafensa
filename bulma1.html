@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hello Bulma!</title>
+  <link rel="stylesheet" href="css/buefy.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@5.8.55/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+</head>
+
+<body>
+  <div id="app">
+    <section class="section">
+      <div class="container">
+        <h1 class="title">
+          Hello World
+        </h1>
+        <p class="subtitle">
+          My first website with <strong>Bulma</strong>!
+        </p>
+        <div class="columns">
+          <div class="column mr-6 has-background-success">
+            <h1 class="title">
+              {{ nombre_col_a }}
+            </h1>
+          </div>
+          <div class="column is-four-fifths has-background-warning">
+            <h1 class="title">
+              {{ nombre_col_b }}
+            </h1>
+          </div>
+          <div class="column">
+            <h1 class="title">
+              C
+            </h1>
+          </div>
+        </div>
+      </div>
+      <b-modal :active="detalle"
+        has-modal-card
+        trap-focus
+        :destroy-on-hide="false"
+        aria-role="dialog"
+        aria-label="Example Modal"
+        close-button-aria-label="Close"
+        aria-modal>
+        <template #default="props">
+          <modal-form v-bind="detalle" @close="detalle = false">
+      <div class="card">
+        <div class="card-image">
+          <figure class="image is-4by3">
+            <img src="https://s.cornershopapp.com/product-images/337576.jpg?versionId=zSoksEHWXBlofaVGZ7k9HoZ6LH8OcpIo"
+              alt="Placeholder image">
+          </figure>
+        </div>
+        <div class="card-content">
+          <div class="media">
+            <div class="media-left">
+              <figure class="image is-48x48">
+                <img
+                  src="https://s.cornershopapp.com/product-images/337576.jpg?versionId=zSoksEHWXBlofaVGZ7k9HoZ6LH8OcpIo"
+                  alt="Placeholder image">
+              </figure>
+            </div>
+            <div class="media-content">
+              <p class="title is-4">SABRITONES CAJA CON 20</p>
+
+              <p v-if="promo===false" class="subtitle is-6">${{ precio }}</p>
+              <p v-if="promo!==false" class="subtitle is-3">PROMOCION ${{ promoprecio }}</p>
+            </div>
+          </div>
+
+          <div class="content">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Phasellus nec iaculis mauris. <a>@bulmaio</a>.
+            <a href="#">#css</a> <a href="#">#responsive</a>
+            <br>
+            <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+          </div>
+        </div>
+      </div>
+    </modal-form>
+  </template>
+    </b-modal>
+      <div>
+        <b-table :data="proveedores" :paginated="isTrue" per-page="20" :pagination-rounded="isTrue">
+          <b-table-column field="idproveedor" label="ID" width="40" centered v-slot="props">
+            {{ props.row.idproveedor }}
+          </b-table-column>
+          <b-table-column field="rfc" label="RFC" width="40" v-slot="props">
+            {{ props.row.rfc }}
+          </b-table-column>
+          <b-table-column field="nomproveedor" searchable label="Razon Social" v-slot="props">
+            {{ props.row.nomproveedor }}
+          </b-table-column>
+          <b-table-column field="limite_credito" label="Limite de credito" width="40" numeric v-slot="props">
+            {{ props.row.id }}
+          </b-table-column>
+          <b-table-column label="Acciones" width="40" v-slot="props">
+            <b-button size="is-small" @click="mostrardetalle(props.row.idproveedor, props.row.nomproveedor)" >
+                Detalles
+            </b-button>
+          </b-table-column>
+          <template #bottom-left>
+            <div class="has-text-right">
+                total de registros
+            </div>
+        </template>
+          <template #footer>
+            <div class="has-text-right">
+                prueba de slot
+            </div>
+        </template>
+        </b-table>
+
+      </div>
+    </section>
+  </div>
+  <script src="js/axios.min.js"></script>
+  <script src="js/vue.js"></script>
+  <script src="js/buefy.min.js"></script>
+  <script type="text/javascript" src="js/bulma1.js"></script>
+</body>
+
+</html>

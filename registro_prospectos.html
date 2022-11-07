@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro prospectos | MAFENSA</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/buefy.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@5.8.55/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+</head>
+<body>
+    <header style="display:none!important;" class="is-flex is-justify-content-space-between is-align-items-center px-4 py-2 mb-5" style="box-shadow: 0px 3px 5px #d3d3d3;">
+        <!-- <figure style="display:inline-block"> -->
+        <img width="8%" src="mafensa-logo.jpg" alt="Logo Mayoreo Ferretero del Norte S.A. de C.V.">
+        <!-- </figure> -->
+        <h1 class="is-size-5 has-text-weight-medium">Registro de prospectos MAFENSA</h1>
+    </header>
+    
+    <section id="prospectosApp" class="p-4 is-flex is-align-items-center is-justify-content-center" style="height:100vh">
+        <div id="demo">
+            <button v-on:click="show = !show">
+                Mostrar/Ocultar
+            </button>
+            <transition name="fade">
+                <p v-if="show">hola</p>
+            </transition>
+        </div>
+        <article>
+            <div id="formulario" style="margin: 0 auto;box-shadow:0px 0px 10px #ccd9e5; border-radius:4px;" class="has-background-white p-5">
+                <div class="is-flex is-justify-content-space-between is-align-items-center" id="btns_change_page">
+                    <div class="is-flex">
+                        <b-button
+                            icon-pack="fas"
+                            icon-left="user"
+                            size="is-medium"
+                            title="Ver formulario"
+                            class="mr-2"
+                            :class="{ active : isActiveForm, 'has-background-info' : isActiveForm, 'has-text-white' : isActiveForm }"
+                            @click="changeView('f')">
+                        </b-button>
+                        <b-button
+                            icon-pack="fas"
+                            icon-left="table"
+                            size="is-medium"
+                            title="Ver tabla"
+                            :class="{ active : isActiveTable, 'has-background-info' : isActiveTable, 'has-text-white' : isActiveTable }"
+                            @click="changeView('t')">
+                        </b-button>
+                    </div>
+
+                    <img width="15%" src="mafensa-logo.jpg" alt="Logo Mayoreo Ferretero del Norte S.A. de C.V.">
+
+                </div>
+                <hr class="" style="width:100%;background-color:#e4ebf1;">
+                
+                <div v-if="isActiveForm">
+                    <p v-if="error_message != ''" class="p-3 has-background-danger-light has-text-danger has-text-weight-medium mb-3" style="border-left:4px solid #f14668;border-radius:4px;">{{ error_message }}</p>
+                    <p v-if="message_sql != ''" class="p-3 has-background-success-light has-text-success has-text-weight-medium mb-3" style="border-left:4px solid #48c78e;border-radius:4px;">{{ message_sql }}</p>
+                    
+                    <b-field label="Nombre a facturar">
+                        <b-input v-model="nombre_f"></b-input>
+                    </b-field>
+                    <b-field label="Nombre comercial">
+                        <b-input v-model="nombre_c"></b-input>
+                    </b-field>
+                    <b-field label="Encargado">
+                        <b-input v-model="encargado"></b-input>
+                    </b-field>
+                    <div class="is-flex is-justify-content-space-between is-align-items-center mb-3">
+                        <b-field label="Ciudad" style="width:48%;" class="m-0">
+                            <b-input v-model="ciudad"></b-input>
+                        </b-field>
+                        <b-field label="Teléfono" style="width:48%;" class="m-0">
+                            <b-input v-model="phone"></b-input>
+                        </b-field>
+                    </div>
+                    <b-field label="Email" class="mb-5">
+                        <b-input type="email" v-model="email">
+                        </b-input>
+                    </b-field>
+        
+                    <b-button type="is-info" style="width:100%" @click="insertProspecto">Guardar datos</b-button>
+                </div>
+
+                <div v-if="isActiveTable" id="tabla" style="height:60vh">
+                    <b-table
+                        :data="prospectos"
+                        :columns="columns"
+                        striped
+                        narrowed
+                        hoverable>
+    
+                        <!-- ESTOS SON BOTONES DE ELIMINAR Y ASI, EN CASO DE QUE SE UTILICEN -->
+                        <!-- <b-table-column width="130" v-slot="props">
+                            <b-button
+                                type="is-info"
+                                icon-pack="fas"
+                                icon-left="edit"
+                                title="Editar"
+                                @click="editProspecto(props.row.id)">
+                            </b-button>
+                            <!- - <b-button type="is-info" pack="fas" icon-right="edit"></b-button> - ->
+                            <b-button
+                                type="is-danger"
+                                icon-pack="fas"
+                                icon-left="trash"
+                                title="Editar"
+                                @click="deleteProspecto(props.row.id)">
+                            </b-button>
+                        </b-table-column> -->
+    
+                        <template #empty>
+                            <p>Sin registros</p>
+                        </template>
+                    </b-table>
+                </div>
+            </div>
+
+        
+        </article>
+    </section>
+
+    <script src="js/axios.min.js"></script>
+    <script src="js/vue.js"></script>
+    <script src="js/buefy.min.js"></script>
+    <!-- <script type="text/javascript" src="js/bulma1.js"></script> -->
+
+    <script src="registro_prospectos.js"></script>
+</body>
+</html>
